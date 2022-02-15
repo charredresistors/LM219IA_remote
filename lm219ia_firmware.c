@@ -17,30 +17,24 @@
 #include <mcs51reg.h>
 #include "delay.h"
 
-// Blink LED at a 1 sec interval
+// Blink LED at approx 1 sec interval, slightly > 30s
 void blink(void){
     P3_7 = 1;
-    delay_sec(1);
-    P3_7 = 0;
-    delay_sec(1);
-}
-
-// Mute the system and blink the LED
-
-void mute(void){
-    P1_0 = 0; // Mute
-    int i;
-    for(i=0; i<30; i++){
-        blink();
-    }
-    P1_0 = 1; // Unmute
+    delay_sec(3);
+    P3_7 = 0; // Last write leaves the LED on
+    delay_sec(3);
 }
 
 // Main Loop
 void main(void)
 {
     while(1) {
-        mute(); // Startup requres that the system be muted
+        P1_0 = 0; // Mute - startup requres >30s mute
+        int i;
+        for(i=0; i<30; i++){ // Blink LED while muted
+            blink();
+        }
+        P1_0 = 1; // Unmute for normal amp funtion
         for(;;){} //Wait forEVER
     }
 }

@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------------
-                      8051 delay library  with the crystal frequency 11.0592MHz
-Filename: delay.c
+                      8051 delay library  with the crystal frequency 12.000MHz
+Filename: delay.h
 Controller: P89V51RD2/89c51(8051 family)
-Oscillator: 11.0592 MHz
-Author: XploreLabz
+Oscillator: 12.000 MHz
+Author: XploreLabz (original)
 website: www.xplorelabz.com 
  ----------------------------------------------------------------------------------*/
 
@@ -44,7 +44,7 @@ void delay_ms(unsigned char ms_count)
  {
         while(ms_count!=0)
          {
-            delay_us(112);   //delay_us is called to generate 1ms delay
+            delay_us(120);   //delay_us is called to generate 1ms delay
              ms_count--;
             }
    }
